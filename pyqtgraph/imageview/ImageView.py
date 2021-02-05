@@ -492,6 +492,8 @@ class ImageView(QtGui.QWidget):
             self.play(0)
         
     def timeout(self):
+        if 't' not in self.axes:
+            return
         now = ptime.time()
         dt = now - self.lastPlayTime
         if dt < 0:
@@ -513,7 +515,7 @@ class ImageView(QtGui.QWidget):
 
     def jumpFrames(self, n):
         """Move video frame ahead n frames (may be negative)"""
-        if self.axes['t'] is not None:
+        if self.axes.get('t', None) is not None:
             self.setCurrentIndex(self.currentIndex + n)
 
     def normRadioChanged(self):
