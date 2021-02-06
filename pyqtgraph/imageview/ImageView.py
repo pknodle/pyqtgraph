@@ -492,7 +492,7 @@ class ImageView(QtGui.QWidget):
             self.play(0)
         
     def timeout(self):
-        if 't' not in self.axes:
+        if self.axes.get('t', None) is None:
             return
         now = ptime.time()
         dt = now - self.lastPlayTime
